@@ -1,0 +1,23 @@
+<%- include header %>
+<div class="aside">
+    <input class="aside_but" type="button" value="博文列表" onclick="location='http://localhost:3000/admin/index'"/>
+    <input class="aside_but" type="button" value="发表文章" onclick="location='http://localhost:3000/admin/post'"/>
+</div>
+<div class="art_list">
+    <ol>
+        <% posts.forEach(function(post){%>
+        <li class="oli">
+            <h2>题目：<a href= /article/<%=post.title%>/<%= post.time.day%>><%=post.title%></a></h2>
+            <p><strong>分类：</strong><%=post.tag %></p>
+            <p><strong>发表时间：</strong><small><%= post.time.minute%></small></p>
+           <% if( post.publish==1){%><strong>已发表</strong><%}%>
+            <div class="edit">
+                <a href= 'edit/<%=post.title%>/<%= post.time.day%>'>修改该文章</a>
+                <a href= 'remove/<%=post.title%>/<%= post.time.day%>'>删除该文章</a>
+            </div>
+        </li>
+        <%})%>
+    </ol>
+</div>
+.
+<%- include foot %>

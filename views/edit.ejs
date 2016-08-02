@@ -1,0 +1,31 @@
+<%- include header %>
+<div class="aside">
+    <input class="aside_but" type="button" value="博文列表" onclick="location='http://localhost:3000/admin/index'"/>
+    <input class="aside_but" type="button" value="发表文章" onclick="location='http://localhost:3000/admin/post'"/>
+</div>
+<div class="postform">
+    <form method="post">
+        标题：
+        <input class="Post_title" type="text" name="title" value="<%=post.title%>" placehold="不要超过15个字哦"/><br/>
+        标签：
+        <select class="Post_tag" name="tag">
+            <option><%=post.tag%></option>
+            <option >----请选择----</option>
+            <option value="心情篇">心情篇</option>
+            <option value="技术篇">技术篇</option>
+            <option value="感悟篇">感悟篇</option>
+            <option value="其他">生活篇</option>
+            <option value="其他">其他</option>
+        </select><br />
+        正文：
+        <div class="Post_text">
+            <textarea name="text" rows="32" cols="97" style="resize:none;font-size:20px;padding:4px;text-indent:1cm"><%=post.text%></textarea><br />
+        </div>
+        <input class="Post_sub" type="submit" value="保存" />
+        <div class="radio">
+            <input  type="checkbox" name="pub" value='0' onclick="this.value==0?this.value=1:this.value=0"/>
+            同时发表至博客
+        </div>
+    </form>
+</div>
+<%- include foot %>

@@ -1,0 +1,23 @@
+<%- include tag %>
+        <div class="main_span">-------感悟篇-------</div>
+        <ol class="index_ol">
+            <% if(posts.length==0){%>
+            <div class="noart">该分类下暂时没有文章</div>
+            <%}%>
+            <% posts.forEach(function(post){%>
+            <a href= /article/<%=post.title%>/<%= post.time.day%>>
+                <li class="index_oli">
+                    <div class="title_span">
+                        <h1><%=post.title%></h1>
+                    </div>
+                    <div class="time_span"><strong>------发表时间：<%= post.time.minute%></strong></div>
+                </li>
+            </a>
+            <%})%>
+        </ol>
+    </main>
+</div>
+<script type="text/javascript" src="/javascripts/style.js"></script>
+<script type="text/javascript" src="/javascripts/move.js"></script>
+</body>
+</html>

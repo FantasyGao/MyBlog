@@ -1,0 +1,10 @@
+<%- include header %>
+<div class="postform" >
+        Blog»<a href="/index">首页</a>»<a href="/index"><%=post.tag%></a>
+        <h2><div class="art_title"><%=post.title%></div></h2>
+        <strong>标签：<%=post.tag%></strong>
+        <div class="art_text" id="art_text">
+          <%- post.text%>
+        </div>
+</div>
+<%- include foot %>

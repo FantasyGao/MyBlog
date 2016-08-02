@@ -1,0 +1,49 @@
+<%- include header %>
+<div class="aside">
+    <input class="aside_but" type="button" value="博文列表" onclick="location='http://localhost:3000/admin/index'"/>
+    <input class="aside_but" type="button" value="发表文章" onclick="location='http://localhost:3000/admin/post'"/>
+</div>
+<div class="postform">
+    <form method="post">
+            标题：
+            <input class="Post_title" type="text" name="title" placehold="不要超过15个字哦"/><br/>
+            标签：
+            <select class="Post_tag" name="tag">
+                <option >----请选择----</option>
+                <option value="心情篇">心情篇</option>
+                <option value="技术篇">技术篇</option>
+                <option value="感悟篇">感悟篇</option>
+                <option value="其他">生活篇</option>
+                <option value="其他">其他</option>
+            </select>
+            <div class="Post_text">
+                <textarea name="text" rows="34" cols="97" style="resize:none;font-size:20px;padding:4px;text-indent:1cm"></textarea><br />
+            </div>
+            <div class="radio">
+                <input  name="publish" type="checkbox"  onclick="this.value==1?this.value=0:this.value=1"/>
+                同时发表至博客
+            </div>
+            <input class="Post_sub" type="submit" value="保存" />
+    </form>
+.</div>
+<% if(success) { %>
+<div id="message1" class="message" style="background-color:white;"><%= success %></div>
+<script>
+    var oMessage1=document.getElementById('message1');
+    setTimeout(function(){
+        oMessage1.style.display = 'none';
+    },2000);
+</script>
+<%  } %>
+<% if(fail) { %>
+<div id="message2" class="message" style="background-color:white;"><%= fail %></div>
+<script>
+    var oMessage2=document.getElementById('message2');
+    setTimeout(function(){
+        oMessage2.style.display = 'none';
+    },2000);
+</script>
+<% } %>
+<script type="text/javascript" src="/javascripts/style.js"></script>
+<script type="text/javascript" src="/javascripts/move1.js"></script>
+<%- include foot %>

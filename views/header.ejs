@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body style="background-image:url(/images/bg1.jpg)">
+  <% if(success) { %>
+  <div id="message1" class="message" style="background-color:white;"><%= success %></div>
+  <script>
+    var oMessage1=document.getElementById('message1');
+    setTimeout(function(){
+      oMessage1.style.display = 'none';
+    },1000);
+  </script>
+  <%  } %>
+  <% if(fail) { %>
+  <div id="message2" class="message" style="background-color:white;"><%= fail %></div>
+  <script>
+    var oMessage2=document.getElementById('message2');
+    setTimeout(function(){
+      oMessage2.style.display = 'none';
+    },1000);
+  </script>
+  <% } %>
