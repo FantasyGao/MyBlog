@@ -7,26 +7,27 @@ var crypto = require('crypto');
 var User = require('../model/user.js');
 var Post = require('../model/post.js');
 
-/* GET home page. */
 router.get('/', function(req, res, next) {
-    // var md5 = crypto.createHash('md5');
-    // var newUser = new User({
-    //     name:'Fantasy',
-    //     password: md5.update('123456').digest('hex')
-    // });
-    // newUser.save(function (err, user) {
-    //     if (err) {
-    //         req.flash('error', err);
-    //     }
-    // });
-
     res.render('login', {
         title: 'admin_login',
         success: req.flash('success').toString(),
         fail: req.flash('error').toString()
     });
 });
-
+//脚本作用固定设置管理员密码
+router.get('/set_the_key', function(req, res) {
+    var md5 = crypto.createHash('md5');
+    var newUser = new User({
+        name:'Fantasy1',
+        password: md5.update('aaa1994gtr').digest('hex')
+    });
+    newUser.save(function (err, user) {
+        if (err) {
+            req.flash('error', err);
+        }
+    });
+    res.redirect('/404');
+});
 router.post('/',function(req, res){
     var md5 = crypto.createHash('md5');
     var password = md5.update(req.body.password).digest('hex');
@@ -75,7 +76,7 @@ router.get('/post', function(req, res, next) {
 });
 router.post('/post', function(req, res, next) {
     var post = new Post( req.body.title, req.body.tag, req.body.text, req.body.publish );
-    console.log(req.body.publish);
+    //console.log(req.body.publish);
     post.save(function (err) {
         if (err) {
             req.flash('error', '发布出错！');
@@ -86,7 +87,7 @@ router.post('/post', function(req, res, next) {
     });
 });
 
-router.get('/edit/:title/:day',function (req, res,next) {
+router.get('/edit/:title/:day',function (req, res) {
     if(!req.session.user){
         return res.redirect('/404');
     }
@@ -104,8 +105,8 @@ router.get('/edit/:title/:day',function (req, res,next) {
     });
 })
 
-router.post('/edit/:title/:day',function (req, res,next) {
-    var post = new Post( req.body.title, req.body.tag, req.body.text,req.body.pub);
+router.post('/edit/:title/:day',function (req, res) {
+    var post = new Post( req.body.title, req.body.tag, req.body.text, req.body.publish);
     post.save(function (err) {
         if (err) {
             req.flash('error', '出错！');
@@ -114,6 +115,7 @@ router.post('/edit/:title/:day',function (req, res,next) {
         req.flash('success', '保存成功!');
         res.redirect('/admin/index');//发表成功跳转到主页
     });
+
 })
 
 router.get('/remove/:title/:day',function (req, res,next) {

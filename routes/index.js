@@ -116,7 +116,7 @@ router.get('/article/:title/:day',function (req, res, next) {
       success: req.flash('success').toString(),
       fail: req.flash('error').toString()
     });
-      console.log(typeof  post.text);
+      //console.log(typeof  post.text);
   });
 
 })
