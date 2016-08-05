@@ -2,7 +2,7 @@
         <div class="main_span">-------心情篇-------</div>
         <ol class="index_ol">
             <% if(posts.length==0){%>
-            <div class="noart"><该分类下暂时没有文章</div>
+            <div class="noart">该分类下暂时没有文章</div>
             <%}%>
             <% posts.forEach(function(post){%>
             <a href= /article/<%=post.title%>/<%= post.time.day%>>
