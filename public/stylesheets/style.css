@@ -54,7 +54,7 @@ input{
 	position:absolute;
 	top:80px;
 	left:150px;
-	background-color:#E0FFFF;
+	background-color:#40E0D0;
 	width:1000px;
 	line-height:30px;
 	border-radius:8px;
@@ -338,4 +338,10 @@ p{
 }
 #uyan_frame{
  margin-top: 300px;
+}
+pre{
+	background-color:darkgray;
+	border-radius:4px;
+	-webkit-border-radius:4px;
+	-moz-border-radius:4px;
 }
