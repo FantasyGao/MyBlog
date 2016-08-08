@@ -19,7 +19,10 @@ Post.prototype.save = function(callback) {
       month : date.getFullYear() + "-" + (date.getMonth() + 1),
       day : date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate(),
       minute : date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate() + " " + 
-      date.getHours() + ":" + (date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes())
+      date.getHours() + ":" + (date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes()),
+      second : date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate() + " " +
+      date.getHours() + ":" + (date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes())+
+      ":" + (date.getSeconds() < 10 ? '0' + date.getSeconds() : date.getSeconds())
   }
   //要存入数据库的文档
   var post = {
@@ -262,7 +265,7 @@ Post.edit = function(day, title, callback) {
 
 
 //删除一篇文章
-Post.remove = function( day, title, callback) {
+Post.remove = function( second, title, callback) {
   //打开数据库
   mongodb.open(function (err, db) {
     if (err) {
@@ -276,7 +279,7 @@ Post.remove = function( day, title, callback) {
       }
       //查询要删除的文档
       collection.remove({
-        "time.day": day,
+        "time.second": second,
         "title": title
       }, function (err) {
         if (err) {
@@ -289,6 +292,34 @@ Post.remove = function( day, title, callback) {
     });
   });
 };
-
+//更新一篇文章及其相关信息
+Post.update = function(day, title, text, publish, callback) {
+  //打开数据库
+  mongodb.open(function (err, db) {
+    if (err) {
+      return callback(err);
+    }
+    //读取 posts 集合
+    db.collection('posttab1', function (err, collection) {
+      if (err) {
+        mongodb.close();
+        return callback(err);
+      }
+      //更新文章内容
+      collection.update({
+        "time.day": day,
+        "title": title
+      }, {
+        $set: {text: text, publish:publish}
+      }, function (err) {
+        mongodb.close();
+        if (err) {
+          return callback(err);
+        }
+        callback(null);
+      });
+    });
+  });
+};
 
 

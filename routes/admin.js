@@ -106,32 +106,25 @@ router.get('/edit/:title/:day',function (req, res) {
 })
 
 router.post('/edit/:title/:day',function (req, res) {
-    var post = new Post( req.body.title, req.body.tag, req.body.text, req.body.publish);
-    post.save(function (err) {
+    Post.update( req.params.day, req.params.title, req.body.text, req.body.publish, function (err) {
         if (err) {
-            req.flash('error', '出错！');
+            req.flash('error', err);
             return res.redirect('/admin/edit/:title/:day');
         }
-        req.flash('success', '保存成功!');
+        req.flash('success', '修改成功!');
         res.redirect('/admin/index');//发表成功跳转到主页
     });
-
 })
 
-router.get('/remove/:title/:day',function (req, res,next) {
+router.get('/remove/:title/:second',function (req, res,next) {
     if(!req.session.user){
         return res.redirect('/404');
     }
-    Post.remove(req.params.day, req.params.title, function (err) {
+    Post.remove(req.params.second, req.params.title, function (err) {
         if (err) {
             req.flash('error', "删除失败");
             return res.redirect('/admin/index');
         }
-        res.render('admin', {
-            title: 'admin_index',
-            success: req.flash('success').toString(),
-            fail: req.flash('error').toString()
-        });
         req.flash('success', "删除成功！");
         res.redirect('/admin/index');
     });
