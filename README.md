@@ -1,15 +1,23 @@
-# 个人博客项目<br>
-This is a blog repository ( Node+Mongodb+Express)<br>
-安装mongodb数据库（网上有教程）<br>
-运行mongodb数据库<br>
- 打开浏览器localhost：27017端口验证<br>
-下载项目到本地<br>
+## 个人博客项目
+
+### 主要使用了Express+mongodb+ejs+友言评论插件
+#### 由于首次使用express，做的功能很简单。
+
+#### 安装
+```bash
+
+安装mongodb数据库
+运行mongodb数据库
+ 打开浏览器localhost：27017端口验证
+ 
+下载项目到本地
  git clone  https://github.com/FantasyGao/MyBlog.git<br>
-进入目录<br>
- cd MyBlog<br>
- 安装依赖<br>
- npm install<br>
-运行<br>
- npm start<br>
-打开浏览器<br>
- localhost //localhost:80  即可进入页面<br>
+进入目录
+ cd MyBlog
+安装依赖
+ npm install
+运行
+ npm start
+打开浏览器
+localhost:80    
+```
